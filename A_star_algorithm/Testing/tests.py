@@ -83,3 +83,6 @@ def test_Scenario():
 
     assert  a.mapObjetives["M3"].getGoalPosition().getX() == 3
     assert  a.mapObjetives["M3"].getGoalPosition().getY() == 1
+
+    assert a.currentPosition.getX() == 2
+    assert a.currentPosition.getY() == 2
