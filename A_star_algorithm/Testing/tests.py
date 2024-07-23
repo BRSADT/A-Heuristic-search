@@ -1,8 +1,7 @@
 import pytest
 
 from A_Star_Algorithm import A_Star_Algorithm
-
-
+from Position import Position
 
 
 def test_adj():
@@ -32,7 +31,56 @@ def test_adj():
     assert list[3].getX() == 2
     assert list[3].getY() == 1
 
+def test_Distances():
+    a = A_Star_Algorithm()
+    a.setScenario()
+    assert a.mapDistancesShelfsToTheirObjective["M1"]==6
+    assert a.mapDistancesShelfsToTheirObjective["M2"]==3
+    assert a.mapDistancesShelfsToTheirObjective["M3"]==5
 
+    mapDistances= a.calculateDistanceToAllShelfs(Position(2,1))
+
+    assert mapDistances["M1"] ==3
+    assert mapDistances["M2"] == 1
+    assert mapDistances["M3"] == 4
+
+
+
+    assert a.calculateDistanceToAnObjective(Position(2,0), Position(1,0)) == 1
+
+def test_Costs():
+    a = A_Star_Algorithm()
+    a.setScenario()
+
+
+
+    mapCosts= a.calculateCostToShelfs(Position(2,1))
+    assert mapCosts["M1"] ==10
+    assert mapCosts["M2"] == 5
+    assert mapCosts["M3"] == 10
+
+    mapCosts= a.calculateCostToShelfs(Position(1,2))
+    assert mapCosts["M1"] ==10
+    assert mapCosts["M2"] == 7
+    assert mapCosts["M3"] == 8
+
+    mapCosts= a.calculateCostToShelfs(Position(2,3))
+    assert mapCosts["M1"] ==12
+    assert mapCosts["M2"] == 7
+    assert mapCosts["M3"] == 8
+
+    mapCosts = a.calculateCostToShelfs(Position(3, 2))
+    assert mapCosts["M1"] == 12
+    assert mapCosts["M2"] == 7
+    assert mapCosts["M3"] == 10
+
+    assert a.calculateCostToObjective(Position(1,0), Position(3,2)) == 7
+
+def test_searchNode():
+    a = A_Star_Algorithm()
+    a.setScenario()
+    Node = a.SearchShelfStateGetNextNode(Position(2,2))
+    assert Node == "M2"
 def test_Scenario():
     a = A_Star_Algorithm()
     a.setScenario()

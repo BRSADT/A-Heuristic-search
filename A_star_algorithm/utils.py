@@ -1,5 +1,6 @@
 import math
+from Position import Position
 
 
-def euclidean_distance(x1,x2,y1,y2):
-    return math.sqrt()
+def manhattan_distance(pos1,pos2):
+    return abs(pos2.getX() - pos1.getX()) + abs(pos2.getY() - pos1.getY())
