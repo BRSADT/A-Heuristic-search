@@ -75,26 +75,27 @@ def test_Costs():
     assert mapCosts["M2"] == 7
     assert mapCosts["M3"] == 10
 
-    assert a.calculateCostToObjective(Position(1,0), Position(3,2)) == 7
+    assert a.calculateCostToObjective(Position(1,0),Position(1,0), Position(3,2)) == 8
 
 def test_searchObjective ():
     a = A_Star_Algorithm()
     a.setScenario()
+    a.origin=Position(0,3)
     nodes = a.SearchObjectiveStateGetNextNode(Position(0, 3), Position(3, 3))
     sorted_nodes = sorted(nodes, key=lambda x: x.costToGoal)
     assert sorted_nodes[0].getPosition().getX() == 1
     assert sorted_nodes[0].getPosition().getY() == 3
-    assert sorted_nodes[0].getCostToGoal() == 2
+    assert sorted_nodes[0].getCostToGoal() == 3
     assert sorted_nodes[1].getPosition().getX() == 0
     assert sorted_nodes[1].getPosition().getY() == 2
-    assert sorted_nodes[1].getCostToGoal() == 4
+    assert sorted_nodes[1].getCostToGoal() == 5
 def test_searchShelf():
     a = A_Star_Algorithm()
     a.setScenario()
-    Node = a.SearchShelfStateGetNextNode(Position(2,2))
-    assert Node.getName("M2")
-    assert Node.getX() == 2
-    assert Node.getY() == 0
+    Node = a.SearchShelfNodeWithLessCostAllAdjacent(Position(2,2))
+    assert Node.getName()== "M2"
+    assert Node.getPosition().getX() == 2
+    assert Node.getPosition().getY() == 0
 def test_Scenario():
     a = A_Star_Algorithm()
     a.setScenario()
@@ -103,36 +104,36 @@ def test_Scenario():
     assert scenario[0][0].type == "Shelf"
     assert scenario[0][1].name == "#"
     assert scenario[0][1].type == "Obstacle"
-    assert scenario[0][2].name == ""
+    assert scenario[0][2].name == "*"
     assert scenario[0][2].type == ""
     assert scenario[0][3].name == "M3"
     assert scenario[0][3].type == "Shelf"
 
-    assert scenario[1][0].name == ""
+    assert scenario[1][0].name == "*"
     assert scenario[1][0].type == ""
     assert scenario[1][1].name == "#"
     assert scenario[1][1].type == "Obstacle"
-    assert scenario[1][2].name == ""
+    assert scenario[1][2].name == "*"
     assert scenario[1][2].type == ""
-    assert scenario[1][3].name == ""
+    assert scenario[1][3].name == "*"
     assert scenario[1][3].type == ""
 
     assert scenario[2][0].name == "M2"
     assert scenario[2][0].type == "Shelf"
-    assert scenario[2][1].name == ""
+    assert scenario[2][1].name == "*"
     assert scenario[2][1].type == ""
     assert scenario[2][2].name == "R"
     assert scenario[2][2].type == "Robot"
-    assert scenario[2][3].name == ""
+    assert scenario[2][3].name == "*"
     assert scenario[2][3].type == ""
 
-    assert scenario[3][0].name == ""
+    assert scenario[3][0].name == "*"
     assert scenario[3][0].type == ""
-    assert scenario[3][1].name == ""
+    assert scenario[3][1].name == "*"
     assert scenario[3][1].type == ""
-    assert scenario[3][2].name == ""
+    assert scenario[3][2].name == "*"
     assert scenario[3][2].type == ""
-    assert scenario[3][3].name == ""
+    assert scenario[3][3].name == "*"
     assert scenario[3][3].type == ""
 
     assert len(a.mapObjetives) == 3

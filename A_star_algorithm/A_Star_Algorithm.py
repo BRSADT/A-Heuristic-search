@@ -125,7 +125,8 @@ class A_Star_Algorithm():
         nodeToMove = ""
         for adjNode in listAdjNodes:
             #cost = self.calculateDistanceToAnObjective(adjNode,objective)
-            cost = self.calculateCostToObjective(adjNode,objective)
+
+            cost = self.calculateCostToObjective(node,adjNode,objective)
             self.currentMap[adjNode.getX()][adjNode.getY()].setCostToGoal(cost)
             ListOfNodes.append(self.currentMap[adjNode.getX()][adjNode.getY()])
 
@@ -161,10 +162,11 @@ class A_Star_Algorithm():
             mapCosts[value.getName()] = costOriginToNode + mapDistancesNodeToShelfs[value.getName()] +  self.mapDistancesShelfsToTheirObjective[value.getName()]
         return mapCosts
 
-    def calculateCostToObjective(self,pos1, pos2):
-        costOriginToNode= self.calculateDistanceToAnObjective(self.origin,pos1)
+    def calculateCostToObjective(self,currentNode,pos1, pos2):
+        costOriginToNode= self.calculateDistanceToAnObjective(self.origin,currentNode)
         costNodeToNode= self.calculateDistanceToAnObjective(pos1,pos2)
-        return costOriginToNode + costNodeToNode
+        print(f"origin {self.origin.getX()},{self.origin.getY()}  current {pos1.getX()},{pos1.getY()}   obj {pos2.getX()},{pos2.getY()}     cost to origin {costOriginToNode}  + 1 + costo to node {costNodeToNode}")
+        return costOriginToNode+1 + costNodeToNode
 
 
     def calculateDistanceShelfToItsObjective(self):
@@ -197,6 +199,7 @@ class A_Star_Algorithm():
         currentNode.setCostToGoal(self.calculateDistanceToAnObjective(currentNode.getPosition(), shelfNode.getPosition()))
         self.openList.append(self.currentMap[self.currentPosition.getX()][self.currentPosition.getY()])
         self.track.append(currentNode)
+        self.origin=currentNode.getPosition()
         self.A_star_algorithm_SearchShelf(currentNode)
 
     def stopAlgorithm(self):
@@ -223,6 +226,7 @@ class A_Star_Algorithm():
             self.updateMapRobot(currentNode)
             self.printCurrentMapObjective(currentNode)
             print("\n\nstart A* for moving the shelf \n\n")
+            self.origin = currentNode.getPosition()
             self.A_star_algorithm_MoveShelf(currentNode,self.mapObjetives[currentNode.name])
 
 
@@ -387,6 +391,7 @@ class A_Star_Algorithm():
                     self.updateMapRobot(currentNode)
                     self.printCurrentMapObjective(currentNode)
                     print("\t\t start A* to search a Shelf\t\t")
+                    self.origin=currentNode.getPosition()
                     self.A_star_algorithm_SearchShelf(currentNode)
 
 
