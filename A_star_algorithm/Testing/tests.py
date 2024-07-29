@@ -215,3 +215,50 @@ def test_A_star_algorithm_test3():
     a.startAlgorithm()
     mapOut = utils.convertMapTostring(a.currentMap, a.X, a.Y)
     assert mapOut == a.goal
+
+
+def test_A_star_algorithm_test4():
+    a = A_Star_Algorithm()
+    a.start = [
+        #     0    1   2   3
+        ["M2", "M1", "M4", "M3", "*"],  # 0
+        ["*", "*", "*", "*", "*"],  # 1
+        ["*", "*","*", "*", "*"],  # 2
+        ["*", "*", "*", "R", "*"] , # 3
+        ["*", "*","*", "*", "*"]  # 2
+    ]
+    a.goal = [
+        ["*", "*", "*", "M2","*"],  # 0
+        ["*", "*", "*", "*", "*"],  # 1
+        ["M1", "*","*", "*", "*"],  # 2
+        ["*", "*", "*", "*", "*"],  # 3
+        ["M3", "*","*", "M4", "*"]  # 2
+    ]
+    a.setScenario()
+
+    a.startAlgorithm()
+    mapOut = utils.convertMapTostring(a.currentMap, a.X, a.Y)
+    assert mapOut == a.goal
+
+def test_A_star_algorithm_test5():
+    a = A_Star_Algorithm()
+    a.start = [
+        #     0    1   2   3
+        ["M2", "M1", "M4", "M3", "*"],  # 0
+        ["#", "#", "*", "*", "*"],  # 1
+        ["*", "*","#", "*", "*"],  # 2
+        ["*", "*", "*", "R", "*"] , # 3
+        ["*", "*","*", "*", "*"]  # 2
+    ]
+    a.goal = [
+        ["*", "*", "*", "M2","*"],  # 0
+        ["#", "#", "*", "*", "*"],  # 1
+        ["M1", "*","#", "*", "*"],  # 2
+        ["*", "*", "*", "*", "*"],  # 3
+        ["M3", "*","*", "M4", "*"]  # 2
+    ]
+    a.setScenario()
+
+    a.startAlgorithm()
+    mapOut = utils.convertMapTostring(a.currentMap, a.X, a.Y)
+    assert mapOut == a.goal
