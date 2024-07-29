@@ -76,11 +76,24 @@ def test_Costs():
 
     assert a.calculateCostToObjective(Position(1,0), Position(3,2)) == 7
 
-def test_searchNode():
+def test_searchObjective ():
+    a = A_Star_Algorithm()
+    a.setScenario()
+    nodes = a.SearchObjectiveStateGetNextNode(Position(0, 3), Position(3, 3))
+    sorted_nodes = sorted(nodes, key=lambda x: x.costToGoal)
+    assert sorted_nodes[0].getPosition().getX() == 1
+    assert sorted_nodes[0].getPosition().getY() == 3
+    assert sorted_nodes[0].getCostToGoal() == 2
+    assert sorted_nodes[1].getPosition().getX() == 0
+    assert sorted_nodes[1].getPosition().getY() == 2
+    assert sorted_nodes[1].getCostToGoal() == 4
+def test_searchShelf():
     a = A_Star_Algorithm()
     a.setScenario()
     Node = a.SearchShelfStateGetNextNode(Position(2,2))
-    assert Node == "M2"
+    assert Node.getName("M2")
+    assert Node.getX() == 2
+    assert Node.getY() == 0
 def test_Scenario():
     a = A_Star_Algorithm()
     a.setScenario()
@@ -134,3 +147,8 @@ def test_Scenario():
 
     assert a.currentPosition.getX() == 2
     assert a.currentPosition.getY() == 2
+
+def test_A_star_algorithm():
+    a = A_Star_Algorithm()
+    a.setScenario()
+    a.startAlgorithm()
