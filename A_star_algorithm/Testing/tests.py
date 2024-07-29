@@ -1,5 +1,6 @@
 import pytest
 
+import utils
 from A_Star_Algorithm import A_Star_Algorithm
 from Position import Position
 
@@ -148,7 +149,68 @@ def test_Scenario():
     assert a.currentPosition.getX() == 2
     assert a.currentPosition.getY() == 2
 
-def test_A_star_algorithm():
+def test_A_star_algorithm_test1():
     a = A_Star_Algorithm()
+    a.start= [
+        #     0    1   2   3
+        ["M1", "#", "*", "M3"],  # 0
+        ["*", "#", "*", "*"],  # 1
+        ["M2", "*", "R", "*"],  # 2
+        ["*", "*", "*", "*"]  # 3
+    ]
+    a.goal = [
+        ["*", "#", "*", "*"],
+        ["*", "#", "*", "*"],
+        ["*", "*", "*", "*"],
+        ["*", "M3", "M2", "M1"]
+    ]
     a.setScenario()
+
     a.startAlgorithm()
+    mapOut=utils.convertMapTostring(a.currentMap,a.X,a.Y)
+    print(mapOut)
+    assert mapOut == a.goal
+
+def test_A_star_algorithm_test2():
+    a = A_Star_Algorithm()
+    a.start= [
+           #     0    1   2   3
+           ["M2", "*", "*", "M3"],  # 0
+           ["#", "#", "#", "*"],  # 1
+           ["*", "#", "*", "*"],  # 2
+           ["*", "R", "*", "*"]  # 3
+        ]
+    a.goal = [
+           ["*", "*", "*", "*"],  # 0
+           ["#", "#", "#", "*"],  # 1
+           ["*", "#", "*", "*"],  # 2
+           ["*", "M3", "M2", "*"]
+        ]
+    a.setScenario()
+
+    a.startAlgorithm()
+    mapOut=utils.convertMapTostring(a.currentMap,a.X,a.Y)
+    assert mapOut == a.goal
+
+
+
+def test_A_star_algorithm_test3():
+    a = A_Star_Algorithm()
+    a.start = [
+        #     0    1   2   3
+        ["M2", "M1", "*", "*"],  # 0
+        ["*", "#", "#", "*"],  # 1
+        ["*", "#", "*", "*"],  # 2
+        ["*", "*", "*", "R"]  # 3
+    ]
+    a.goal = [
+        ["*", "*", "*", "M1"],  # 0
+        ["*", "#", "#", "*"],  # 1
+        ["*", "#", "*", "M2"],  # 2
+        ["*", "*", "*", "*"]
+    ]
+    a.setScenario()
+
+    a.startAlgorithm()
+    mapOut = utils.convertMapTostring(a.currentMap, a.X, a.Y)
+    assert mapOut == a.goal

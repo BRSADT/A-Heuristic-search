@@ -7,7 +7,7 @@ from utils import manhattan_distance as manhattan
 class A_Star_Algorithm():
 
     def __init__(self):
-        """self.start = [
+        self.start = [
             #     0    1   2   3
             ["M1", "#", "*", "M3"],  # 0
             ["*", "#", "*", "*"],  # 1
@@ -19,8 +19,8 @@ class A_Star_Algorithm():
             ["", "#", "", ""],
             ["", "", "", ""],
             ["", "M3", "M2", "M1"]
-        ]"""
-        self.start = [
+        ]
+        """self.start = [
            #     0    1   2   3
            ["M2", "*", "", "M3"],  # 0
            ["#", "#", "#", "*"],  # 1
@@ -32,7 +32,7 @@ class A_Star_Algorithm():
            ["#", "#", "#", "*"],  # 1
            ["*", "#", "*", "*"],  # 2
            ["*", "M3", "M2", ""]
-        ]
+        ]"""
         self.track = []
         self.openList = []
         self.closedList = []

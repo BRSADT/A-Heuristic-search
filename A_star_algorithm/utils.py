@@ -56,3 +56,9 @@ def updateNodeIfInList(nodesToAdd, nodeList):
         if found==False:
             nodeList.insert(0,nodeToAdd)
     return nodeList
+def convertMapTostring(currentMap,x,y):
+    list = [[0 for j in range(y)] for i in range(x)]
+    for i in range(x):
+        for j in range(y):
+            list[i][j]=currentMap[i][j].getName()
+    return list
