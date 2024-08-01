@@ -55,22 +55,22 @@ def test_Costs():
 
 
 
-    mapCosts= a.calculateCostToShelfs(Position(2,1))
+    mapCosts= a.calculateCostToShelfs(a.origin,Position(2,1))
     assert mapCosts["M1"] ==10
     assert mapCosts["M2"] == 5
     assert mapCosts["M3"] == 10
 
-    mapCosts= a.calculateCostToShelfs(Position(1,2))
+    mapCosts= a.calculateCostToShelfs(a.origin,Position(1,2))
     assert mapCosts["M1"] ==10
     assert mapCosts["M2"] == 7
     assert mapCosts["M3"] == 8
 
-    mapCosts= a.calculateCostToShelfs(Position(2,3))
+    mapCosts= a.calculateCostToShelfs(a.origin,Position(2,3))
     assert mapCosts["M1"] ==12
     assert mapCosts["M2"] == 7
     assert mapCosts["M3"] == 8
 
-    mapCosts = a.calculateCostToShelfs(Position(3, 2))
+    mapCosts = a.calculateCostToShelfs(a.origin,Position(3, 2))
     assert mapCosts["M1"] == 12
     assert mapCosts["M2"] == 7
     assert mapCosts["M3"] == 10
